@@ -1,9 +1,9 @@
 
 
-import React {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import config from "../services/config.json";
-import { useEffect, useState } from "react";
+// import Products from "./products";
 function Cart(){
     const [cartItems, setcartItems] = useState([]);
 
@@ -19,10 +19,36 @@ function Cart(){
             }
         };
         fetchCarditems();
-    }, [];)
+    }, [])
+    
 
     return(
-        <div className="container"></div>
+    <div className="container">
+        { cartItems.map((item)=>(
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+              
+                    
+                       {
+                        item.map((val, key) =>{
+                            return(
+                                <tr key ={key}>
+                                    <td>{val.name}</td>
+                                    <td>{val.price}</td>
+                                </tr>
+                            )
+                        })
+                       }
+                    
+                
+            </table> 
+))}
+        </div>
     );
 }
 

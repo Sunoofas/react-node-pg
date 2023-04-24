@@ -9,14 +9,15 @@ const Header =()=>{
            <div className="logo">Mallu Shopping</div>
            <ul>
               <li>Home</li>
-              <li>Signup</li>
+              
               <li>Login</li>
-           </ul>
-       
-       <div className="search">
+              <div className="search">
         <i className="fa fa-search"></i>
         <i className="fa fa-shopping-basket"></i>
        </div>
+           </ul>
+       
+       
        </nav>
      )
 }

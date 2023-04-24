@@ -18,5 +18,12 @@ db.any("SELECT * FROM mallu_product")
        .catch((error) =>{
            console.log(error);
        });
+       db.any("SELECT * FROM Login")
+         .then((data) =>{
+              console.log(data);
+         })
+         .catch((error) =>{
+            console.log(error);
+         });
 
        module.exports = db;

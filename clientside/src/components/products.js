@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import config from '../services/config.json';
 import axios from "axios";
-import Maincontent from "./Maincontent";
+import Header from "./header";
+
 
 function Products(){
       
@@ -32,7 +33,8 @@ function Products(){
         }
       };
       return(
-        <
+        <div>
+       <Header /> 
      <div className="container">
         {cartItems.map((item)=>(
 
@@ -42,14 +44,17 @@ function Products(){
             <img src={item.thumb} />
         </div>
         <div className="card_header">
-            <h2>{item.product_name}</h2>
+            <h2>{item.name}</h2>
             <p className="price">{item.price}</p>
-            <div ><button className="btn" onClick={()=>console.log("hello button!!")}>Add to cart</button></div>
+            <div ><button className="bttn" onClick={() => addToCart(item)}>
+              Add to Cart
+            </button></div>
         </div>
       </div>
       ))}  
 </div>  
+</div>
       )
       };
 
-export module Products;
+export default Products;

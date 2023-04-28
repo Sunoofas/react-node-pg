@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-    getUserData,
-    addUserData
+    
+    addUserData, addUserDataSession
 }= require('../controllers/member');
 
-router.get('/login', getUserData);
-router.post('/login', addUserData);
 
+router.post('/Login', addUserData);
+router.get("/Login", addUserDataSession);
 module.exports = router;

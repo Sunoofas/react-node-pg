@@ -1,29 +1,38 @@
 
 import './App.css';
- import Cart from './components/Cart';
-import Header from './components/header';
+//  import Cart from './components/Cart';
+// import Header from './components/header';
 import Products from './components/products';
-import React, {useState, useEffect} from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Login from './components/login';
-function App() {
-
-  
-  return (
-    <div className="container">
-       
-        
-       
-       <Routes>
-      <Route path="/" element={<Products/>}>
-          <Route path="/cart" element={<Cart/>} />  
-        
-      </Route>
-      <Route path='login' element={<Login />}/>
-      </Routes>
-      
-    </div>
-  );
-}
-
-export default App;
+import React from 'react';
+// import { Routes, Route} from 'react-router-dom';
+ import Login from './components/login';
+ import Home from './components/Home';
+ import MainLayout from "./MainLayout";
+ import AuthProtect from "./AuthProtect";
+ import { Outlet, useRoutes } from "react-router-dom";
+ 
+ 
+ function App() {
+   return useRoutes([
+     {
+       path: "/",
+       element: (
+           <AuthProtect>
+             <MainLayout>
+                 <Outlet />
+             </MainLayout>
+           </AuthProtect>
+       ),
+       children: [
+         { path: "/", element: <Home /> },
+         // { path: "signin", element: <SignIn /> },
+         { path: "products", element: <Products /> },
+         
+       ],
+     },
+     { path: "login", element: <Login /> },
+   ]);
+ }
+   
+ 
+ export default App;

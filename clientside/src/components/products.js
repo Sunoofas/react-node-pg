@@ -41,7 +41,7 @@ function Products(){
         
         <div className="card" key={item.id}>
         <div className="card_img">
-            <img src={item.thumb} />
+            {/* <img src={item.thumb} /> */}
         </div>
         <div className="card_header">
             <h2>{item.name}</h2>

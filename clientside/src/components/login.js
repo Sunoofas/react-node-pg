@@ -1,48 +1,64 @@
 import React, { useState } from "react";
 import axios from "axios";
 import './login.css';
+import  {Link, useNavigate}  from "react-router-dom";
 
 import config from "../services/config.json";
 
+
 function Login(){
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [datainput, setDataInput] = useState('');
     
-    axios.defaults.withCredentials = true;
+    const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+   
+    const navigate = useNavigate();
+   const login = async()=>{
+    try {
+    const response = await axios.post(`${config.api_base_url}/member/Login`, {
+     username: username,
+      password: password,
+    });
 
-    const login =async()=>{
-         try{
-            const response = await axios.post(`${config.api_base_url}/member/login`,{
-                email: email,
-                password: password,
-            });
-            console.log(response)
-           
-         } catch(error){
-            console.error(error);
-         }
-        };
     
-    const submitThis=()=>{
-        const info ={email:email, password:password};
-        setDataInput(info);
+    console.log(response.data);
+
+    // check if login is successful
+    if (response.data.success) {
+      // navigate to home page
+      alert("User has been successfully logged in!");
+      navigate("/products");
+
+      // show success alert
+      // alert("User has been successfully logged in!");
+    } else {
+        // show error alert
+      alert("Something went wrong. Please try again.");
     }
+  } catch (error) {
+    console.error(error);
+
+    // show error alert
+    alert("Invalid email or password. Please try again later.");
+  }
+};
+    
+   
     return(
-        <div class="form">
-            <form action=""onSubmit={submitThis}>
+        <div className="form">
+            <form action="">
            <div>
-              <label htmlFor="email">Email</label>
-              <input type="text" name="email"id="email"value={email} onChange={(e)=>setEmail(e.target.value)}/>
+              <label>Email</label>
+              <input type="text" name=""id="email"value={username} onChange={(e)=>setUsername(e.target.value)}/>
 
            </div>
            <div>
-               <label htmlFor="password">Password</label>
-               <input type="text" name="password" id="password"value={password}onChange={(e)=>setPassword(e.target.value)}/>
+               <label>Password</label>
+               <input type="password" name="password" id="password"value={password}onChange={(e)=>setPassword(e.target.value)}/>
 
            </div>
-           <button  class="button" type="submit">Login</button>
+           <button type="submit" className="button" onClick={login}>Login</button>
            </form>
+          
         </div>
     )
 }
